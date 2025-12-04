@@ -93,7 +93,6 @@ if rodar:
 
     # ---------- métricas ----------
     mean_loss = losses.mean()
-    median_loss = np.median(losses)
 
     var_95 = np.percentile(losses, 95)
     var_99 = np.percentile(losses, 99)
@@ -102,7 +101,7 @@ if rodar:
     threshold = var_995
     es_995 = losses[losses >= threshold].mean()
 
-    prob_large_year = (losses >= 300_000_000).mean()
+    prob_large_year = (losses >= 260_000_000).mean()
 
     # ==========================
     # RESULTADOS
@@ -112,7 +111,6 @@ if rodar:
     col1, col2 = st.columns(2)
 
     col1.metric("Média Anual", f"R$ {mean_loss:,.0f}")
-    col1.metric("Mediana", f"R$ {median_loss:,.0f}")
     col1.metric("VaR 95%", f"R$ {var_95:,.0f}")
 
     col2.metric("VaR 99%", f"R$ {var_99:,.0f}")
@@ -120,7 +118,7 @@ if rodar:
     col2.metric("ES 99.5%", f"R$ {es_995:,.0f}")
 
     st.write(
-        f"**Probabilidade anual de perda ≥ R$ 300 milhões:** "
+        f"**Probabilidade anual de perda >= R$ 260 milhões:** "
         f"{prob_large_year:.4%}"
     )
 
