@@ -7,7 +7,7 @@ st.set_page_config(
     layout="centered"
 )
 
-st.title("Simulação Monte Carlo - Pareto Truncada")
+st.title("Simulação Monte Carlo - Riscos Operacionais")
 st.write("Preencha os parâmetros abaixo e clique em **Rodar Simulação**.")
 
 # ==========================
