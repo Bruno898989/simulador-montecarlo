@@ -96,8 +96,7 @@ if rodar:
 
     # Exibição dos parâmetros de frequência
     st.write(f"**Total de ataques no ano:** {n_attacks:,}")
-    st.write(f"**Probabilidade individual de sucesso (p_success):** {p_success:.6f}")
-    st.write(f"**Lambda da Poisson (λ):** {lambda_success:.2f}")
+
 
     # ---------- severidade (Pareto Truncada) ----------
     alpha = xaverage / (xaverage - xm)
