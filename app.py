@@ -28,12 +28,14 @@ attacks_per_day = st.number_input(
     value=100
 )
 
+# >>> AGORA PERMITE VALORES < 1 <<<
 successful_attacks_year = st.number_input(
     "Quantidade de ataques com sucesso no ano",
-    min_value=0,
-    value=60,
-    step=1,
-    help="Total esperado de ataques bem-sucedidos por ano"
+    min_value=0.0,
+    value=0.5,
+    step=0.1,
+    format="%.2f",
+    help="Total esperado de ataques bem-sucedidos por ano (pode ser menor que 1)"
 )
 
 xm = st.number_input(
@@ -92,11 +94,12 @@ if rodar:
         st.stop()
 
     p_success = successful_attacks_year / n_attacks
-    lambda_success = successful_attacks_year  # parâmetro da Poisson
+    lambda_success = successful_attacks_year  # parâmetro da Poisson (pode ser < 1)
 
     # Exibição dos parâmetros de frequência
     st.write(f"**Total de ataques no ano:** {n_attacks:,}")
-
+    st.write(f"**Probabilidade individual de sucesso (p_success):** {p_success:.8f}")
+    st.write(f"**Lambda da Poisson (λ):** {lambda_success:.4f}")
 
     # ---------- severidade (Pareto Truncada) ----------
     alpha = xaverage / (xaverage - xm)
@@ -115,7 +118,7 @@ if rodar:
 
     # ---------- métricas ----------
     mean_loss = losses.mean()
-    median_loss = np.median(losses)   # >>> MEDIANA ADICIONADA <<<
+    median_loss = np.median(losses)
 
     var_95 = np.percentile(losses, 95)
     var_99 = np.percentile(losses, 99)
@@ -162,4 +165,3 @@ if rodar:
     ax.set_ylabel("Frequência")
 
     st.pyplot(fig)
-
